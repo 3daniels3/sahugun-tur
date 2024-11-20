@@ -1,0 +1,17 @@
+# Ignorar node_modules en ambas carpetas (cliente y servidor)
+Client/node_modules/
+server/node_modules/
+
+# Ignorar archivos de log
+*.log
+
+# Ignorar archivos temporales de editores
+.vscode/
+.idea/
+
+# Ignorar archivos de entorno
+.env
+
+# Ignorar directorios de compilación y producción
+/dist/
+/build/
