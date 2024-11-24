@@ -10,7 +10,7 @@ server/node_modules/
 .idea/
 
 # Ignorar archivos de entorno
-.env
+#.env
 
 # Ignorar directorios de compilación y producción
 /dist/
