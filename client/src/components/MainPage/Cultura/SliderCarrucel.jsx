@@ -73,7 +73,7 @@ export default function SliderCarrucel() {
             key={index}
             onClick={() => setCurrentIndex(index)}
             className={`w-3 h-3 rounded-full ${
-              currentIndex === index ? "bg-yellow-800" : "bg-gray-400"
+              currentIndex === index ? "bg-green-800" : "bg-yellow-200"
             }`}
           ></button>
         ))}
