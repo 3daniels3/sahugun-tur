@@ -1,7 +1,8 @@
 import Header from '../components/Header/Header'
 import Banner from '../components/MainPage/Banner/Banner'
 import Cultura from '../components/MainPage/Cultura/Cultura'
-import Historia from '../components/MainPage/Historia'
+import Historia from '../components/MainPage/Historia/Historia'
+import ScrollUpButton from '../components/ScrollUpButton'
 
 export default function mainpage() {
   
@@ -10,10 +11,11 @@ export default function mainpage() {
     <>
       <Header></Header>
       <Banner texto={'Sahagún Tierra Querida'}></Banner>
-      <section className='w-[65%] mx-auto my-[8rem] space-y-[12rem] text-green-900'>
+      <article className='my-[8rem] space-y-[12rem] text-green-900'>
         <Historia></Historia>
-        <Cultura></Cultura>
-      </section>
+        <Cultura className=''></Cultura>
+      </article>
+      <ScrollUpButton></ScrollUpButton>
     </>
   )
 }

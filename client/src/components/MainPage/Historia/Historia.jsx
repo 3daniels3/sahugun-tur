@@ -1,11 +1,11 @@
-import Titulo from "../Titulo";
+import Titulo from "../../Titulo";
 
 export default function Historia() {
 
   return(
-    <section>
+    <section className="sm:w-[65%] mx-auto ">
       <Titulo texto={'Historia'}></Titulo>
-      <div className="flex justify-between items-center">
+      <div className="flex space-x-10 justify-center items-center">
         <div className="overflow-hidden rounded-full w-[18rem] h-[18rem] flex justify-center items-center drop-shadow-[0_2px_9px_rgba(0,0,0,0.4)]">
           <img
           className="scale-[1.8]" 
