@@ -1,19 +1,16 @@
-import NavBar_Button from "./NavBarButton"
+import NavBar_Button from "./NavBar_Button"
 import Button from "../Button";
-import { AiOutlineHome } from "react-icons/ai"
-import { AiOutlineEnvironment } from "react-icons/ai";
-import { AiOutlineShop } from "react-icons/ai";
-import { AiOutlineUsergroupAdd } from "react-icons/ai";
-import { AiOutlineLogin } from "react-icons/ai";
-
-
-
+import { AiOutlineHome, AiOutlineEnvironment, AiOutlineShop, AiOutlineUsergroupAdd, AiOutlineLogin } from "react-icons/ai";
 
 export default function Header() {
-  
+  const [isModalOpen, setModalOpen] = useState(false); // Estado para abrir/cerrar el modal
+
+  const openModal = () => setModalOpen(true); // Función para abrir el modal
+  const closeModal = () => setModalOpen(false); // Función para cerrar el modal
+
   return (
     <>
-    <header className="flex justify-between items-center w-full h-[3rem] px-[1.5rem] py-[.3rem] bg-yellow-600/60 backdrop-blur-sm rounded-b-xl drop-shadow-lg text-white fixed top-0 z-50">
+    <header className="flex justify-between items-center w-full h-[3rem] px-[1.5rem] py-[.3rem] bg-yellow-600/60 backdrop-blur-md rounded-b-xl drop-shadow-lg text-white fixed top-0 z-50">
       <div className="drop-shadow-lg ">
         {/* Logo */}
         <h2 className="drop-shadow-md font-bold">SAHAGÚN TOUR</h2>
