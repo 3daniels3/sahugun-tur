@@ -71,16 +71,16 @@ export default function SliderCarrucel({contenido}) {
 
       {/* Indicadores */}
       <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 flex space-x-2">
-        {contenido.map((item) => (
-          <button
-            key={item.id}
-            onClick={() => setCurrentIndex(item.id)}
-            className={`w-3 h-3 rounded-full ${
-              currentIndex === item.id ? "bg-green-800" : "bg-green-100"
-            }`}
-          ></button>
-        ))}
-      </div>
+          {contenido.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => setCurrentIndex(index)}
+              className={`w-3 h-3 rounded-full ${
+                currentIndex === index ? "bg-green-800" : "bg-green-200"
+              }`}
+            ></button>
+          ))}
+        </div>
     </div>
   );
 }
