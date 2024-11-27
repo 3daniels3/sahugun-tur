@@ -1,5 +1,5 @@
 import { useState } from "react"; // Importar useState para manejar el estado
-import LoginModal from "../LoginModal"; // Importar el componente del modal
+import LoginModal from "../Login/LoginModal"; // Importar el componente del modal
 import NavBar_Button from "./NavBarButton";
 import Button from "../Button";
 import { AiOutlineHome, AiOutlineEnvironment, AiOutlineShop, AiOutlineUsergroupAdd, AiOutlineLogin } from "react-icons/ai";

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import ReactPlayer from 'react-player';
+import ReactPlayer from 'react-player/youtube';
 
 export default function SliderCarrucel({contenido}) {
 
@@ -24,13 +24,13 @@ export default function SliderCarrucel({contenido}) {
         className="flex transition-transform duration-500"
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
       >
-          {contenido.map(({titulo, video, descripcion}) => (
-          <div className="w-full flex-shrink-0 mb-[3rem]">
+          {contenido.map(({id, titulo, video, descripcion}) => (
+          <div key={id} className="w-full flex-shrink-0 mb-[3rem]">
             <h3 className="text-3xl font-bold">
               {titulo}
             </h3>
             <div className="flex justify-center items-center mt-[2.5rem] px-5 space-x-8">
-              <div className="w-[23rem] h-[12.9rem] bg-yellow-200 rounded-xl overflow-hidden drop-shadow-[0_3px_3px_rgba(0,0,0,0.5)]">
+              <div className="w-[23rem] h-[12.9rem] bg-green-100 rounded-xl overflow-hidden drop-shadow-[0_3px_3px_rgba(0,0,0,0.5)]">
                 <ReactPlayer 
                   url={video}
                   playing={false}
@@ -46,7 +46,9 @@ export default function SliderCarrucel({contenido}) {
                 />
               </div>
               <div className="w-[23rem] h-[15rem] rounded-2xl flex items-center justify-center">
-                {descripcion}
+                <p>
+                  {descripcion}
+                </p>
               </div>
             </div>
           </div>
@@ -56,25 +58,25 @@ export default function SliderCarrucel({contenido}) {
       {/* Botones de navegación */}
       <button
         onClick={prevSlide}
-        className="absolute top-1/2 left-5 transform -translate-y-1/2 bg-green-800 text-white p-2 rounded-full shadow-lg hover:bg-green-700"
+        className="absolute top-1/2 left-5 transform -translate-y-1/2 bg-green-800 text-green-100 p-2 rounded-full shadow-lg hover:bg-green-700"
       >
         ❮
       </button>
       <button
         onClick={nextSlide}
-        className="absolute top-1/2 right-5 transform -translate-y-1/2 bg-green-800 text-white p-2 rounded-full shadow-lg hover:bg-green-700"
+        className="absolute top-1/2 right-5 transform -translate-y-1/2 bg-green-800 text-green-100 p-2 rounded-full shadow-lg hover:bg-green-700"
       >
         ❯
       </button>
 
       {/* Indicadores */}
       <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 flex space-x-2">
-        {contenido.map((_, index) => (
+        {contenido.map((item) => (
           <button
-            key={index}
-            onClick={() => setCurrentIndex(index)}
+            key={item.id}
+            onClick={() => setCurrentIndex(item.id)}
             className={`w-3 h-3 rounded-full ${
-              currentIndex === index ? "bg-green-800" : "bg-yellow-200"
+              currentIndex === item.id ? "bg-green-800" : "bg-green-100"
             }`}
           ></button>
         ))}
