@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import axios from "axios";
 
-export default function LoginModal({ isOpen, onClose, onRegisterClick }) {
+export default function LoginModal({ isOpen, onClose, onRegisterClick, setUserEmail }) {
   if (!isOpen) return null;
 
   const [email, setEmail] = useState("");
@@ -13,6 +14,8 @@ export default function LoginModal({ isOpen, onClose, onRegisterClick }) {
       const response = await axios.post("http://localhost:5000/api/auth/login", { email, password });
       console.log("Token recibido:", response.data.token);
       localStorage.setItem("token", response.data.token);
+      localStorage.setItem("userEmail", email); // Guardar el correo del usuario
+      setUserEmail(email); // Actualizar el estado global
       onClose();
       alert("¡Login exitoso!");
     } catch (error) {
