@@ -1,5 +1,5 @@
 import Titulo from "../../Titulo"
-import SliderCarrucel from "./SliderCarrucel"
+import SliderCarrucel from "../SliderCarrucel"
 
 export default function Cultura() {
 
@@ -43,7 +43,10 @@ export default function Cultura() {
         </div>
         {/*slider */}
         <div className="sm:w-[70%] mx-auto w-full pt-[2rem] pb-[1rem] bg-white/50 backdrop-blur-md rounded-3xl drop-shadow-[0_3px_30px_rgba(0,0,0,1)]">
-          <SliderCarrucel contenido={contenidoCultural}></SliderCarrucel>
+          <SliderCarrucel 
+            contenido={contenidoCultural} 
+            truncado={false}
+          />
         </div>
       </div>
     </section>

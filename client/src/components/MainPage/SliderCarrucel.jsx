@@ -1,20 +1,22 @@
 import React, { useState } from "react";
 import ReactPlayer from 'react-player/youtube';
+import AcortadorTexto from "./AcortadorTexto";
 
-export default function SliderCarrucel({contenido}) {
-
+export default function SliderCarrucel({ contenido, truncado=true, onExpand }) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  // Mover al siguiente slide
   const nextSlide = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % contenido.length);
   };
 
-  // Mover al slide anterior
   const prevSlide = () => {
     setCurrentIndex(
       (prevIndex) => (prevIndex - 1 + contenido.length) % contenido.length
     );
+  };
+
+  const handleExpand = (index) => {
+    onExpand(index);  // Pasamos el índice correcto al hacer clic
   };
 
   return (
@@ -24,31 +26,35 @@ export default function SliderCarrucel({contenido}) {
         className="flex transition-transform duration-500"
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
       >
-          {contenido.map(({id, titulo, video, descripcion}) => (
+        {contenido.map(({ id, titulo, video, descripcion }, index) => (
           <div key={id} className="w-full flex-shrink-0 mb-[3rem]">
-            <h3 className="text-3xl font-bold">
-              {titulo}
-            </h3>
+            <h3 className="text-3xl font-bold">{titulo}</h3>
             <div className="flex justify-center items-center mt-[2.5rem] px-5 space-x-8">
               <div className="w-[23rem] h-[12.9rem] bg-green-100 rounded-xl overflow-hidden drop-shadow-[0_3px_3px_rgba(0,0,0,0.5)]">
                 <ReactPlayer 
                   url={video}
                   playing={false}
-                  volume={0.5}
                   controls={true}
                   width={368}
                   height={207}
-                />
-                <img
-                  src={video}
-                  alt={`Slide ${video}`}
-                  className="h-full"
+                  config={{
+                    youtube: {
+                      playerVars: {
+                        modestbranding: 1,
+                        rel: 0,
+                        iv_load_policy: 3,
+                        disablekb: 1,
+                      },
+                    },
+                  }}                
                 />
               </div>
               <div className="w-[23rem] h-[15rem] rounded-2xl flex items-center justify-center">
-                <p>
-                  {descripcion}
-                </p>
+                <AcortadorTexto
+                  descripcion={descripcion}
+                  truncado={truncado}
+                  onExpand={() => handleExpand(index)} // Pasamos el índice a onExpand
+                />
               </div>
             </div>
           </div>
@@ -71,16 +77,19 @@ export default function SliderCarrucel({contenido}) {
 
       {/* Indicadores */}
       <div className="absolute bottom-3 left-1/2 transform -translate-x-1/2 flex space-x-2">
-          {contenido.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentIndex(index)}
-              className={`w-3 h-3 rounded-full ${
-                currentIndex === index ? "bg-green-800" : "bg-green-200"
-              }`}
-            ></button>
-          ))}
-        </div>
+        {contenido.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => {
+              setCurrentIndex(index);  // Actualizamos el índice
+              handleExpand(index);  // Llamamos a handleExpand con el índice
+            }}
+            className={`w-3 h-3 rounded-full ${
+              currentIndex === index ? "bg-green-800" : "bg-green-200"
+            }`}
+          ></button>
+        ))}
+      </div>
     </div>
   );
 }

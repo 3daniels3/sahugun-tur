@@ -1,6 +1,7 @@
 import Header from '../components/Header/Header'
 import Banner from '../components/MainPage/Banner/Banner'
 import Cultura from '../components/MainPage/Cultura/Cultura'
+import Galeria from '../components/MainPage/Galeria/Galeria'
 import Historia from '../components/MainPage/Historia/Historia'
 import HistoriasAncestrales from '../components/MainPage/HistoriasAncestrales/HistoriasAncestrales'
 import ScrollUpButton from '../components/ScrollUpButton'
@@ -16,6 +17,7 @@ export default function mainpage() {
         <Historia></Historia>
         <Cultura></Cultura>
         <HistoriasAncestrales></HistoriasAncestrales>
+        <Galeria></Galeria>
       </article>
       <ScrollUpButton></ScrollUpButton>
     </>
