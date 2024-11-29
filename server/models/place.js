@@ -1,7 +1,7 @@
-const { DataTypes } = require('sequelize');
-const { sequelize } = require('../config/db');
+const { DataTypes } = require("sequelize");
+const { sequelize } = require("../config/db");
 
-const Place = sequelize.define('Place', {
+const Place = sequelize.define("Place", {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -13,14 +13,16 @@ const Place = sequelize.define('Place', {
   },
   description: {
     type: DataTypes.STRING,
-    allowNull: false,
   },
   location: {
-    type: DataTypes.GEOMETRY('POINT'),  // Almacenamos las coordenadas geográficas
-    allowNull: false,
+    type: DataTypes.STRING,
   },
   imageUrl: {
     type: DataTypes.STRING,
+  },
+  userId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
   },
 });
 
