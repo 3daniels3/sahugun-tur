@@ -22,8 +22,8 @@ export default function Header() {
             <li className="flex items-center space-x-3 drop-shadow-md">
               <ul><NavBar_Button texto={'Inicio'} icono={<AiOutlineHome />} ruta={'/'} /></ul>
               <ul><NavBar_Button texto={'Lugares'} icono={<AiOutlineShop />} /></ul>
-              <ul><NavBar_Button texto={'Mapa'} icono={<AiOutlineEnvironment />} /></ul>
-              <ul><NavBar_Button texto={'Eventos'} icono={<AiOutlineUsergroupAdd />} /></ul>
+              {/* <ul><NavBar_Button texto={'Mapa'} icono={<AiOutlineEnvironment />} /></ul> */}
+              {/* <ul><NavBar_Button texto={'Eventos'} icono={<AiOutlineUsergroupAdd />} /></ul> */}
             </li>
           </nav>
         </div>

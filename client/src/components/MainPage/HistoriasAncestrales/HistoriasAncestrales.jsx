@@ -10,13 +10,13 @@ export default function HistoriasAncestrales() {
   const contenidoHistorias = [
     {
       id: 1,
-      titulo: 'Nuestra Musica',
+      titulo: 'Titulo 1',
       video: 'https://www.youtube.com/watch?v=WNV4SwsPg6I',
       descripcion: '"Más Sahagunense que Nunca" de Luis Alberto Prado es un himno emotivo que rinde homenaje a la identidad y cultura del municipio de Sahagún, Córdoba, Colombía. La canción exalta el orgullo de ser sahagunense, resaltando su historia, tradiciones y la calidez de su gente, con un ritmo festivo que inspira unidad y pertenencia.'
     },
     {
       id: 2,
-      titulo: 'Nuestra Danza',
+      titulo: 'Titulo 2',
       video: 'https://www.youtube.com/watch?v=oOv-3r7zYx8',
       descripcion: 'La danza de Sahagún refleja las raíces culturales de la región sabanera. La danza de Sahagún refleja las raíces culturales de la región sabanera. La danza de Sahagún refleja las raíces culturales de la región sabanera.La danza de Sahagún refleja las raíces culturales de la región sabaneraLa danza de Sahagún refleja las raíces culturales de la región sabanera. La danza de Sahagún refleja las raíces culturales de la región sabanera.'
     },
@@ -38,7 +38,7 @@ export default function HistoriasAncestrales() {
 
       <img className="w-full" src="/BarraDecorativaUp.png" alt="barra decorativa" />
 
-      <div className="text-center">
+      <div className="text-center my-[2rem]">
         <SliderCarrucel
           contenido={contenidoHistorias}
           onExpand={handleExpand}  // Pasa la función que maneja el índice
