@@ -22,7 +22,7 @@ const verifyToken = (req, res, next) => {
 };
 
 // Crear un lugar
-router.post('/add', verifyToken, createPlace);
+router.post('/', verifyToken, createPlace);
 
 // Obtener todos los lugares
 router.get('/', getAllPlaces);

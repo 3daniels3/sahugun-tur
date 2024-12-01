@@ -1,6 +1,6 @@
 import { Routes, Route } from 'react-router-dom'
 import MainPage from './pages/mainpage';
-import place from './pages/place';
+import Place from './pages/place';
 
 function App() {
 
@@ -8,7 +8,7 @@ function App() {
     <>
       <Routes>
         <Route path = '/' element = {<MainPage/>} />
-        <Route path = '/place' element = {<place/>} />
+        <Route path="/Place" element={<Place />} />
       </Routes>
     </>
   )
