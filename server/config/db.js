@@ -17,11 +17,12 @@ const connectDB = async () => {
   try {
     await sequelize.authenticate();
     console.log("Conexión a la base de datos establecida correctamente.");
+    await sequelize.sync({ alter: true }); // Sincroniza los modelos
+    console.log("Modelos sincronizados con la base de datos.");
   } catch (error) {
     console.error("No se pudo conectar a la base de datos:", error);
-    process.exit(1); // Salir de la aplicación si la conexión falla
+    process.exit(1);
   }
 };
 
-// Exportar la conexión y la función
 module.exports = { sequelize, connectDB };

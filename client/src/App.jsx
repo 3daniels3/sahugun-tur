@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router-dom'
 import MainPage from './pages/mainpage';
+import Place from './pages/place';
 
 function App() {
 
@@ -7,6 +8,7 @@ function App() {
     <>
       <Routes>
         <Route path = '/' element = {<MainPage/>} />
+        <Route path="/Place" element={<Place />} />
       </Routes>
     </>
   )

@@ -1,7 +1,8 @@
 const express = require('express');
-const Place = require('../models/place');
+const { createPlace, getAllPlaces, getPlaceById, deletePlace } = require('../controllers/placecontroller');
 const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv');
+
 dotenv.config();
 
 const router = express.Router();
@@ -20,29 +21,16 @@ const verifyToken = (req, res, next) => {
   }
 };
 
-// Crear un lugar (solo si es admin)
-router.post('/add', verifyToken, async (req, res) => {
-  if (req.user.role !== 'admin') {
-    return res.status(403).json({ message: 'Acceso denegado' });
-  }
-
-  const { name, description, location, imageUrl } = req.body;
-  try {
-    const newPlace = await Place.create({ name, description, location, imageUrl });
-    res.status(201).json(newPlace);
-  } catch (error) {
-    res.status(500).json({ message: 'Error al crear el lugar' });
-  }
-});
+// Crear un lugar
+router.post('/', verifyToken, createPlace);
 
 // Obtener todos los lugares
-router.get('/', async (req, res) => {
-  try {
-    const places = await Place.findAll();
-    res.json(places);
-  } catch (error) {
-    res.status(500).json({ message: 'Error al obtener los lugares' });
-  }
-});
+router.get('/', getAllPlaces);
+
+// Obtener un lugar específico por ID
+router.get('/:id', getPlaceById);
+
+// Eliminar un lugar
+router.delete('/:id', verifyToken, deletePlace);
 
 module.exports = router;
