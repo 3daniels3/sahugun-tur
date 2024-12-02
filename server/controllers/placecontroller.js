@@ -1,31 +1,42 @@
-const Place = require('../models/place');
+const Place = require("../models/place");
+const fs = require("fs");
+const path = require("path");
+const authenticate = require("../middlewares/authMiddleware");  // Importar el middleware
 
 // Crear un nuevo lugar
 const createPlace = async (req, res) => {
-  const { name, description, image, location } = req.body;
-
   try {
-    // Validación básica de datos
+    const { name, description } = req.body;
+
     if (!name || !description) {
-      return res.status(400).json({ message: 'El nombre y la descripción son obligatorios' });
+      return res.status(400).json({ message: "El nombre y la descripción son obligatorios." });
     }
 
-    // Si no se proporcionan coordenadas, asignar una ubicación predeterminada
-    const finalLocation = location || "POINT(8.9469 -75.4425)"; // Coordenadas de Sahagún
+    let image = null;
+    if (req.file) {
+      image = `/uploads/${req.file.filename}`;
+    } else {
+      console.warn("No se ha proporcionado una imagen.");
+    }
 
-    // Crear el lugar con los datos proporcionados
+    // Verifica si la carpeta de uploads existe, si no, la crea
+    const uploadDir = path.join(__dirname, '..', 'uploads');
+    if (!fs.existsSync(uploadDir)) {
+      fs.mkdirSync(uploadDir, { recursive: true });
+    }
+
+    // Crear el lugar en la base de datos
     const newPlace = await Place.create({
       name,
       description,
-      location: finalLocation, // Ubicación proporcionada o predeterminada
       image,
-      userId: req.user.id, // Asociar el lugar al usuario logueado
+      userId: req.user.id, // Ahora se usa el userId del JWT
     });
 
     res.status(201).json(newPlace);
   } catch (error) {
-    console.error('Error al crear el lugar:', error);
-    res.status(500).json({ message: 'Error al crear el lugar' });
+    console.error("Error al crear el lugar:", error.stack || error);
+    res.status(500).json({ message: "Error al crear el lugar." });
   }
 };
 
@@ -35,8 +46,8 @@ const getAllPlaces = async (req, res) => {
     const places = await Place.findAll();
     res.status(200).json(places);
   } catch (error) {
-    console.error('Error al obtener los lugares:', error);
-    res.status(500).json({ message: 'Error al obtener los lugares' });
+    console.error("Error al obtener los lugares:", error);
+    res.status(500).json({ message: "Error al obtener los lugares" });
   }
 };
 
@@ -47,12 +58,12 @@ const getPlaceById = async (req, res) => {
   try {
     const place = await Place.findByPk(id);
     if (!place) {
-      return res.status(404).json({ message: 'Lugar no encontrado' });
+      return res.status(404).json({ message: "Lugar no encontrado" });
     }
     res.status(200).json(place);
   } catch (error) {
-    console.error('Error al obtener el lugar:', error);
-    res.status(500).json({ message: 'Error al obtener el lugar' });
+    console.error("Error al obtener el lugar:", error);
+    res.status(500).json({ message: "Error al obtener el lugar" });
   }
 };
 
@@ -63,14 +74,14 @@ const deletePlace = async (req, res) => {
   try {
     const place = await Place.findByPk(id);
     if (!place) {
-      return res.status(404).json({ message: 'Lugar no encontrado' });
+      return res.status(404).json({ message: "Lugar no encontrado" });
     }
 
     await place.destroy();
-    res.status(200).json({ message: 'Lugar eliminado correctamente' });
+    res.status(200).json({ message: "Lugar eliminado correctamente" });
   } catch (error) {
-    console.error('Error al eliminar el lugar:', error);
-    res.status(500).json({ message: 'Error al eliminar el lugar' });
+    console.error("Error al eliminar el lugar:", error);
+    res.status(500).json({ message: "Error al eliminar el lugar" });
   }
 };
 
