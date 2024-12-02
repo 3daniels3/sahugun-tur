@@ -23,7 +23,7 @@ export default function Cultura() {
 
       {/* Titulo */}
       <div className="sm:w-[65%] mx-auto" >
-        <Titulo texto={'Sahagún Capital Cultural'}></Titulo>
+        <Titulo texto={'Sahagún Ciudad Cultural'}></Titulo>
       </div>
 
       {/* Contenido cultura */}
