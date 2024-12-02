@@ -2,9 +2,9 @@ const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
 const { connectDB } = require("./config/db");
-const { User, Place } = require("./models/index"); // Importa los modelos desde el índice
 const authRoutes = require("./routes/auth");
 const placesRoutes = require("./routes/places");
+const path = require("path");
 
 dotenv.config();
 
@@ -12,6 +12,7 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use("/uploads", express.static(path.join(__dirname, "uploads"))); // Servir imágenes
 
 // Conectar a la base de datos
 connectDB();
