@@ -21,9 +21,11 @@ export default function Place() {
         console.error("Error al obtener los lugares:", error);
       }
     };
-
+  
     fetchPlaces();
+    
   }, []);
+
 
   // Manejar envío del formulario para agregar un lugar
   const handleAddPlace = async (e) => {
@@ -63,9 +65,9 @@ export default function Place() {
           {places.map((place) => (
             <div key={place.id} className="bg-white rounded-lg shadow-md p-4">
               <img
-                src={`http://localhost:5000/${place.image}`}
-                alt={place.name}
-                className="w-full h-[200px] object-cover rounded-md"
+                  src={`http://localhost:5000${place.image}`} // Sin el slash adicional
+                  alt={place.name}
+                  className="w-full h-[200px] object-cover rounded-md"
               />
               <h2 className="mt-2 text-xl font-bold">{place.name}</h2>
               <p className="mt-2">{place.description}</p>

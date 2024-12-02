@@ -14,7 +14,7 @@ const createPlace = async (req, res) => {
 
     let image = null;
     if (req.file) {
-      image = `/uploads/${req.file.filename}`;
+      image = `uploads/${req.file.filename}`;
     } else {
       console.warn("No se ha proporcionado una imagen.");
     }
