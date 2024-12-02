@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Titulo from "../../Titulo";
-import ModalHistoria from "./ModalHistoria";
+import Modal from "../../Modal/Modal";
 import SliderCarrucel from "../SliderCarrucel";
 
 export default function HistoriasAncestrales() {
@@ -18,7 +18,7 @@ export default function HistoriasAncestrales() {
       id: 2,
       titulo: 'Titulo 2',
       video: 'https://www.youtube.com/watch?v=oOv-3r7zYx8',
-      descripcion: 'La danza de Sahagún refleja las raíces culturales de la región sabanera. La danza de Sahagún refleja las raíces culturales de la región sabanera. La danza de Sahagún refleja las raíces culturales de la región sabanera.La danza de Sahagún refleja las raíces culturales de la región sabaneraLa danza de Sahagún refleja las raíces culturales de la región sabanera. La danza de Sahagún refleja las raíces culturales de la región sabanera.'
+      descripcion: 'La danza de Sahagún refleja las raíces culturales de la región sabanera. La danza de Sahagún refleja las raíces culturales de la región sabanera.'
     },
   ];
 
@@ -49,10 +49,11 @@ export default function HistoriasAncestrales() {
 
       {/* Modal */}
       {isModalOpen && (
-        <ModalHistoria
+        <Modal
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
-          contenidoHistorias={contenidoHistorias[currentIndex]}  // Pasa la historia correspondiente
+          contenido={contenidoHistorias[currentIndex]}  // Pasa la historia correspondiente
+          tipoMultimedia={'video'}
         />
       )}
     </section>

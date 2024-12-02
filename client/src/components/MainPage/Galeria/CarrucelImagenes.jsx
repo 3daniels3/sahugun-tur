@@ -14,30 +14,38 @@ export default function CarrucelImagenes({ contenido }) {
   };
 
   return (
-    <div className="relative w-[80%] mx-auto">
+    <div className="relative flex items-center w-full h-[45rem] mx-auto overflow-hidden">
       {/* Slides */}
       <div
-        className="flex transition-transform duration-500 overflow-hidden"
+        className="flex transition-transform duration-500 w-full h-[40rem]"
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
       >
-        {contenido.map(({imagen, piePagina}) => (
-          <div className="w-full flex-shrink-0 mb-[5rem] sm:h-[40rem] text-center space-y-5">
-            <img className="rounded-3xl" src={imagen} alt={piePagina} />
-            <p className="drop-shadow-lg">{piePagina}</p>
-          </div>
+
+        {console.log(contenido)}
+        {contenido.map(({ id, imagen, piePagina }) => (
+          <div key={id} className="w-full flex flex-col items-center justify-center flex-shrink-0 text-center space-y-5">
+              <div className="aspect-video flex justify-center overflow-hidden">
+                <img
+                className="h-full rounded-3xl"
+                  src={imagen}
+                  alt={piePagina}
+                />
+              </div>
+              <p className="drop-shadow-lg">{piePagina}</p>
+            </div>
         ))}
       </div>
 
       {/* Botones de navegación */}
       <button
         onClick={prevSlide}
-        className="absolute top-1/2 left-5 transform -translate-y-1/2 bg-green-800 text-green-100 p-4 text-3xl rounded-full shadow-lg hover:bg-green-700 drop-shadow-[0_3px_30px_rgba(0,0,0,1)]"
+        className="absolute top-1/2 left-[3%] transform -translate-y-1/2 bg-green-800 text-green-100 p-4 rounded-full shadow-lg hover:bg-green-700"
       >
         ❮
       </button>
       <button
         onClick={nextSlide}
-        className="absolute top-1/2 right-5 transform -translate-y-1/2 bg-green-800 text-green-100 p-4 text-3xl rounded-full shadow-lg hover:bg-green-700 drop-shadow-[0_3px_30px_rgba(0,0,0,1)]"
+        className="absolute top-1/2 right-[3%] transform -translate-y-1/2 bg-green-800 text-green-100 p-4 rounded-full shadow-lg hover:bg-green-700"
       >
         ❯
       </button>
@@ -48,8 +56,8 @@ export default function CarrucelImagenes({ contenido }) {
           <button
             key={index}
             onClick={() => {
-              setCurrentIndex(index);  // Actualizamos el índice
-              handleExpand(index);  // Llamamos a handleExpand con el índice
+              setCurrentIndex(index)
+              handleExpand(index)
             }}
             className={`w-3 h-3 rounded-full ${
               currentIndex === index ? "bg-green-800" : "bg-green-200"
