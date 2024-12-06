@@ -65,7 +65,7 @@ export default function Place() {
           {places.map((place) => (
             <div key={place.id} className="bg-white rounded-lg shadow-md p-4">
               <img
-                  src={`http://localhost:5000${place.image}`} // Sin el slash adicional
+                  src={`http://localhost:5000/${place.image}`} // Sin el slash adicional
                   alt={place.name}
                   className="w-full h-[200px] object-cover rounded-md"
               />
@@ -75,10 +75,10 @@ export default function Place() {
           ))}
         </div>
         <button
-          className="mt-8 bg-yellow-500 hover:bg-yellow-600 text-white py-2 px-4 rounded-lg"
+          className="mt-8 bg-yellow-500 hover:bg-yellow-600 text-white py-2 px-4 rounded-lg flex justify-center mx-auto"
           onClick={() => setShowAddModal(true)}
         >
-          Contribuir
+          CONTRIBUIR
         </button>
       </div>
 

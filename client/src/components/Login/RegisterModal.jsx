@@ -26,13 +26,52 @@ export default function RegisterModal({ isOpen, onClose }) {
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
       <div className="bg-white p-8 rounded-md shadow-lg w-[90%] max-w-[400px] relative">
-        <button onClick={onClose} className="absolute top-3 right-3 text-gray-500 hover:text-gray-700 text-xl font-bold">✕</button>
+        <button
+          onClick={onClose}
+          className="absolute top-3 right-3 text-gray-500 hover:text-gray-700 text-xl font-bold"
+        >
+          ✕
+        </button>
         <h2 className="text-2xl font-bold mb-4 text-center text-yellow-600">Regístrate</h2>
         {errorMessage && <p className="text-red-500 text-center">{errorMessage}</p>}
 
         <form onSubmit={handleRegister} className="space-y-4">
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">Correo Electrónico</label>
+            <label htmlFor="firstName" className="block text-sm font-medium text-gray-700">
+              Nombre
+            </label>
+            <input
+              type="text"
+              id="firstName"
+              className="w-full border rounded-md px-3 py-2 mt-1 focus:outline-none focus:ring focus:ring-yellow-400"
+              placeholder="Ingresa tu nombre"
+            />
+          </div>
+          <div>
+            <label htmlFor="lastName" className="block text-sm font-medium text-gray-700">
+              Apellido
+            </label>
+            <input
+              type="text"
+              id="lastName"
+              className="w-full border rounded-md px-3 py-2 mt-1 focus:outline-none focus:ring focus:ring-yellow-400"
+              placeholder="Ingresa tu apellido"
+            />
+          </div>
+          <div>
+            <label htmlFor="birthDate" className="block text-sm font-medium text-gray-700">
+              Fecha de Nacimiento
+            </label>
+            <input
+              type="date"
+              id="birthDate"
+              className="w-full border rounded-md px-3 py-2 mt-1 focus:outline-none focus:ring focus:ring-yellow-400"
+            />
+          </div>
+          <div>
+            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+              Correo Electrónico
+            </label>
             <input
               type="email"
               id="email"
@@ -43,7 +82,9 @@ export default function RegisterModal({ isOpen, onClose }) {
             />
           </div>
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">Contraseña</label>
+            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+              Contraseña
+            </label>
             <input
               type="password"
               id="password"
@@ -53,7 +94,10 @@ export default function RegisterModal({ isOpen, onClose }) {
               required
             />
           </div>
-          <button type="submit" className="w-full bg-yellow-500 hover:bg-yellow-600 text-white py-2 rounded-md transition">
+          <button
+            type="submit"
+            className="w-full bg-yellow-500 hover:bg-yellow-600 text-white py-2 rounded-md transition"
+          >
             Registrarse
           </button>
         </form>
