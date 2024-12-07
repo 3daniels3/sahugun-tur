@@ -1,6 +1,8 @@
 # Ignorar node_modules en ambas carpetas (cliente y servidor)
 Client/node_modules/
 server/node_modules/
+server/uploads/
+
 
 # Ignorar archivos de log
 *.log
