@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import axios from "axios";
 
 export default function LoginModal({ isOpen, onClose, onRegisterClick, setUserEmail }) {
-  if (!isOpen) return null;
-
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -16,17 +14,27 @@ export default function LoginModal({ isOpen, onClose, onRegisterClick, setUserEm
       localStorage.setItem("token", response.data.token);
       localStorage.setItem("userEmail", email); // Guardar el correo del usuario
       setUserEmail(email); // Actualizar el estado global
+      setErrorMessage(""); // Limpiar mensaje de error en login exitoso
       onClose();
       alert("¡Login exitoso!");
+      window.location.reload();
     } catch (error) {
       setErrorMessage(error.response ? error.response.data.message : "Error de conexión");
+      alert("Error en el login:", error);
     }
   };
+
+  const handleClose = () => {
+    setErrorMessage(""); // Limpiar mensaje de error al cerrar el modal
+    onClose(); // Llamar la función original de cierre
+  };
+
+  if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
       <div className="bg-white p-8 rounded-md shadow-lg w-[90%] max-w-[400px] relative">
-        <button onClick={onClose} className="absolute top-3 right-3 text-gray-500 hover:text-gray-700 text-xl font-bold">✕</button>
+        <button onClick={handleClose} className="absolute top-3 right-3 text-gray-500 hover:text-gray-700 text-xl font-bold">✕</button>
         <h2 className="text-2xl font-bold mb-4 text-center text-yellow-600">Iniciar Sesión</h2>
         {errorMessage && <p className="text-red-500 text-center">{errorMessage}</p>}
 

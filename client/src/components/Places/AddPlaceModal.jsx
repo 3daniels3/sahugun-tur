@@ -34,6 +34,7 @@ export default function AddPlaceModal({ isOpen, onClose }) {
       setNewPlace({ name: "", description: "" }); // Limpiar formulario
       setImageFile(null); // Limpiar archivo de imagen
       alert("¡Lugar agregado exitosamente!");
+      window.location.reload();
     } catch (error) {
       console.error("Error al agregar lugar:", error);
       alert("Error al agregar lugar. Revisa los datos e inténtalo nuevamente.");

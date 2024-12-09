@@ -1,45 +1,33 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import LoginModal from "../Login/LoginModal";
 import RegisterModal from "../Login/RegisterModal";
 import Button from "../Button";
-import {
-  AiOutlineHome,
-  AiOutlineEnvironment,
-  AiOutlineShop,
-  AiOutlineUsergroupAdd,
-  AiOutlineLogin,
-} from "react-icons/ai";
+import { useAuth } from "../Context/AuthContext";
+import { Link } from "react-router-dom";
+import { AiOutlineHome, AiOutlineShop, AiOutlineLogin } from "react-icons/ai";
 import NavBar_Button from "./NavBarButton";
 
 export default function Header() {
   const [isLoginOpen, setLoginOpen] = useState(false); // Modal de login
   const [isRegisterOpen, setRegisterOpen] = useState(false); // Modal de registro
-  const [userEmail, setUserEmail] = useState(null); // Correo del usuario logueado
   const [dropdownOpen, setDropdownOpen] = useState(false); // Controla la visibilidad del dropdown
+  const { userEmail, setUserEmail } = useAuth(); // Usamos el contexto de autenticación
 
-  //Este comando es god, puedes guardar items dinamicos en local
-  // Cargar el correo del localStorage al iniciar la app
-  useEffect(() => {
-    const storedEmail = localStorage.getItem("userEmail");
-    if (storedEmail) {
-      setUserEmail(storedEmail);
-    }
-  }, []);
- 
-  const openLoginModal = () => { //condicional para antes de presionar el boton login
+  const openLoginModal = () => {
     setLoginOpen(true);
-    setRegisterOpen(false); 
+    setRegisterOpen(false);
   };
 
-  const openRegisterModal = () => {//condicional que establece valores antes de presionar el de registrar
-    setLoginOpen(false); 
-    setRegisterOpen(true); 
+  const openRegisterModal = () => {
+    setLoginOpen(false);
+    setRegisterOpen(true);
   };
-//funcion para que se borre del localstorage y no se lea el correo despues de cerrar sesion
-  const handleLogout = () => { // Esta funcion hay que mandarla con un archivo aparte y luego exportarlas luego de terminar pruebas
-    setUserEmail(null);
-    localStorage.removeItem("userEmail"); 
-    localStorage.removeItem("token"); 
+
+  const handleLogout = () => {
+    setUserEmail(null); // Limpiamos el estado de userEmail
+    localStorage.removeItem("userEmail"); // Limpiamos el localStorage
+    localStorage.removeItem("token"); // Limpiamos el token
+    setDropdownOpen(false); // Cerramos el dropdown
     alert("¡Has cerrado sesión!");
   };
 
@@ -47,19 +35,22 @@ export default function Header() {
     <>
       <header className="flex justify-between items-center w-full h-[3rem] px-[1.5rem] py-[.3rem] bg-yellow-600/60 backdrop-blur-sm rounded-b-xl drop-shadow-lg text-white fixed top-0 z-50">
         <div className="drop-shadow-lg">
-          <h2 className="drop-shadow-md font-bold">SAHAGÚN TOUR</h2>
+          <Link to={"/"}>
+            <h2 className="drop-shadow-md font-bold">SAHAGÚN TOUR</h2>
+          </Link>
         </div>
         <div className="flex">
           <nav className="mx-[3rem]">
             <li className="flex items-center space-x-3 drop-shadow-md">
-              <ul><NavBar_Button texto={'Inicio'} icono={<AiOutlineHome />} ruta={'/'} /></ul>
-              <ul><NavBar_Button texto={'Lugares'} icono={<AiOutlineShop />} ruta={'/place'} /></ul>
-              {/* <ul><NavBar_Button texto={'Mapa'} icono={<AiOutlineEnvironment />} /></ul> */}
-              {/* <ul><NavBar_Button texto={'Eventos'} icono={<AiOutlineUsergroupAdd />} /></ul> */}
+              <ul>
+                <NavBar_Button texto={"Inicio"} icono={<AiOutlineHome />} ruta={"/"} />
+              </ul>
+              <ul>
+                <NavBar_Button texto={"Lugares"} icono={<AiOutlineShop />} ruta={"/place"} />
+              </ul>
             </li>
           </nav>
         </div>
-        {/* Cambiar entre Iniciar Sesión y dropdown */}
         {userEmail ? (
           <div className="relative">
             <button
@@ -106,7 +97,7 @@ export default function Header() {
         isOpen={isLoginOpen}
         onClose={() => setLoginOpen(false)}
         onRegisterClick={openRegisterModal}
-        setUserEmail={setUserEmail}
+        setUserEmail={setUserEmail} // Pasamos el setter del contexto
       />
       <RegisterModal
         isOpen={isRegisterOpen}
